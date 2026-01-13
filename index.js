@@ -6,202 +6,201 @@ const cam = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeig
 const renderer = new THREE.WebGLRenderer({alpha: true,antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-
 cam.position.z = 25;
+
+// tekstur planet
 const textureLoader = new THREE.TextureLoader();
 const sunTexture = textureLoader.load('./img/2k_sun.jpg');
+const merkuriTexture = textureLoader.load('./img/2k_mercury.jpg');
+const venusTexture = textureLoader.load('./img/2k_venus_surface.jpg');
+const bumiTexture = textureLoader.load('./img/2k_earth.jpg');
+const marsTexture = textureLoader.load('./img/2k_mars.jpg');
+const jupiterTexture = textureLoader.load('./img/2k_jupiter.jpg');
+const saturnusTexture = textureLoader.load('./img/2k_saturn.jpg');
+const ringTexture = textureLoader.load('./img/2k_saturn.jpg');
+const uranusTexture = textureLoader.load('./img/2k_uranus.jpg');
+const neptunusTexture = textureLoader.load('./img/2k_neptune.jpg');
 
-//matahri
-const geo = new THREE.SphereGeometry(3, 64, 64);
-const material = new THREE.MeshBasicMaterial({map: sunTexture});
-const mesh = new THREE.Mesh(geo, material);
-scene.add(mesh);
+//matahari
+const matahari = new THREE.SphereGeometry(3, 64, 64);
+const material_matahari = new THREE.MeshBasicMaterial({map: sunTexture});
+const meshMatahari = new THREE.Mesh(matahari, material_matahari);
+scene.add(meshMatahari);
 
 //merkuri
-const merkuriTexture = textureLoader.load('./img/2k_mercury.jpg');
-const geo2 = new THREE.SphereGeometry(0.4, 64, 64);
-const material2 = new THREE.MeshStandardMaterial({map: merkuriTexture});
-const mesh2 = new THREE.Mesh(geo2, material2);
-mesh2.position.x = 5.2;
+const merkuri = new THREE.SphereGeometry(0.4, 64, 64);
+const material_merkuri = new THREE.MeshStandardMaterial({map: merkuriTexture});
+const meshMerkuri = new THREE.Mesh(merkuri, material_merkuri);
+meshMerkuri.position.x = 1.5;
+meshMerkuri.position.z = 5;
 
 const merkuriOrbit = new THREE.Object3D();
 scene.add(merkuriOrbit);
-merkuriOrbit.add(mesh2);
-
-mesh2.castShadow = true;
-mesh2.receiveShadow = true;
-
+merkuriOrbit.add(meshMerkuri);
+meshMerkuri.castShadow = true;
+meshMerkuri.receiveShadow = true;
 
 //venus
-const venusTexture = textureLoader.load('./img/2k_venus_surface.jpg');
-const geo3 = new THREE.SphereGeometry(0.6, 64, 64);
-const material3 = new THREE.MeshStandardMaterial({map: venusTexture});
-const mesh3 = new THREE.Mesh(geo3, material3);
-mesh3.position.x = 6.6;
+const venus = new THREE.SphereGeometry(0.6, 64, 64);
+const material_venus = new THREE.MeshStandardMaterial({map: venusTexture});
+const meshVenus = new THREE.Mesh(venus, material_venus);
+meshVenus.position.x = 6.6;
 
 const venusOrbit = new THREE.Object3D();
 scene.add(venusOrbit);
-venusOrbit.add(mesh3);
+venusOrbit.add(meshVenus);
 
-mesh3.castShadow = true;
-mesh3.receiveShadow = true;
-
+meshVenus.castShadow = true;
+meshVenus.receiveShadow = true;
 
 //bumi
-const bumiTexture = textureLoader.load('./img/2k_earth.jpg');
-const geo4 = new THREE.SphereGeometry(0.6, 64, 64);
-const material4 = new THREE.MeshStandardMaterial({map: bumiTexture});
-const mesh4 = new THREE.Mesh(geo4, material4);
-mesh4.position.x = 9;
+const bumi = new THREE.SphereGeometry(0.6, 64, 64);
+const material_bumi = new THREE.MeshStandardMaterial({map: bumiTexture});
+const meshBumi = new THREE.Mesh(bumi, material_bumi);
+meshBumi.position.x = 7.2;
+meshBumi.position.z = -5;
 
 const earthOrbit = new THREE.Object3D();
 scene.add(earthOrbit);
-earthOrbit.add(mesh4);
+earthOrbit.add(meshBumi);
 
-mesh4.castShadow = true;
-mesh4.receiveShadow = true;
+meshBumi.castShadow = true;
+meshBumi.receiveShadow = true;
 
 
 //mars
-const marsTexture = textureLoader.load('./img/2k_mars.jpg');
-const geo5 = new THREE.SphereGeometry(0.4, 64, 64);
-const material5 = new THREE.MeshStandardMaterial({map: marsTexture});
-const mesh5 = new THREE.Mesh(geo5, material5);
-mesh5.position.x = 11;
+const mars = new THREE.SphereGeometry(0.4, 64, 64);
+const material_mars = new THREE.MeshStandardMaterial({map: marsTexture});
+const meshMars = new THREE.Mesh(mars, material_mars);
+meshMars.position.x = -11;
 
 const marsOrbit = new THREE.Object3D();
 scene.add(marsOrbit);
-marsOrbit.add(mesh5);
+marsOrbit.add(meshMars);
 
-mesh5.castShadow = true;
-mesh5.receiveShadow = true;
+meshMars.castShadow = true;
+meshMars.receiveShadow = true;
 
 
 //jupiter
-const jupiterTexture = textureLoader.load('./img/2k_jupiter.jpg');
-const geo6 = new THREE.SphereGeometry(1.2, 64, 64);
-const material6 = new THREE.MeshStandardMaterial({map: jupiterTexture});
-const mesh6 = new THREE.Mesh(geo6, material6);
-mesh6.position.x = 14;
+const jupiter = new THREE.SphereGeometry(1.2, 64, 64);
+const material_jupiter = new THREE.MeshStandardMaterial({map: jupiterTexture});
+const meshJupiter = new THREE.Mesh(jupiter, material_jupiter);
+meshJupiter.position.x = -10;
+meshJupiter.position.z = -10;
 
 const jupiterOrbit = new THREE.Object3D();
 scene.add(jupiterOrbit);
-jupiterOrbit.add(mesh6);
+jupiterOrbit.add(meshJupiter);
 
-mesh6.castShadow = true;
-mesh6.receiveShadow = true;
+meshJupiter.castShadow = true;
+meshJupiter.receiveShadow = true;
 
 
 //saturnus
-const saturnusTexture = textureLoader.load('./img/2k_saturn.jpg');
-const geo7 = new THREE.SphereGeometry(1, 64, 64);
-const material7 = new THREE.MeshStandardMaterial({map: saturnusTexture});
-const mesh7 = new THREE.Mesh(geo7, material7);
-mesh7.position.x = 18;
+const saturnus = new THREE.SphereGeometry(1, 64, 64);
+const material_saturnus = new THREE.MeshStandardMaterial({map: saturnusTexture});
+const meshSaturnus = new THREE.Mesh(saturnus, material_saturnus);
+meshSaturnus.position.x = 18;
 
 const saturnusOrbit = new THREE.Object3D();
 scene.add(saturnusOrbit);
-saturnusOrbit.add(mesh7);
+saturnusOrbit.add(meshSaturnus);
 
-const ringTexture = textureLoader.load('./img/2k_saturn.jpg');
-const geoRing = new THREE.RingGeometry( 1, 2, 32);
-const materialRing = new THREE.MeshStandardMaterial({
-  map: ringTexture,
-  side: THREE.DoubleSide,
-  transparent: true
-});
-const meshRing = new THREE.Mesh( geoRing, materialRing );
+const ringSaturnus = new THREE.RingGeometry( 1, 2, 32);
+const material_ring = new THREE.MeshStandardMaterial({ map: ringTexture, side: THREE.DoubleSide, transparent: true });
+const meshRing = new THREE.Mesh( ringSaturnus, material_ring );
 meshRing.position.set(0,0,0)
 meshRing.rotation.x = -Math.PI / 3;
-mesh7.add( meshRing);
+meshSaturnus.add( meshRing);
 
 meshRing.castShadow = true;
 meshRing.receiveShadow = true;
 
-mesh7.castShadow = true;
-mesh7.receiveShadow = true;
+meshSaturnus.castShadow = true;
+meshSaturnus.receiveShadow = true;
 
 
 //uranus
-const uranusTexture = textureLoader.load('./img/2k_uranus.jpg');
-const geo8 = new THREE.SphereGeometry(1, 64, 64);
-const material8 = new THREE.MeshStandardMaterial({map: uranusTexture});
-const mesh8 = new THREE.Mesh(geo8, material8);
-mesh8.position.x = 21;
+const uranus = new THREE.SphereGeometry(1, 64, 64);
+const material_uranus = new THREE.MeshStandardMaterial({map: uranusTexture});
+const meshUranus = new THREE.Mesh(uranus, material_uranus);
+meshUranus.position.x = 1;
+meshUranus.position.z = 21;
 
 const uranusOrbit = new THREE.Object3D();
 scene.add(uranusOrbit);
-uranusOrbit.add(mesh8);
-
-mesh8.castShadow = true;
-mesh8.receiveShadow = true;
+uranusOrbit.add(meshUranus);
+meshUranus.castShadow = true;
+meshUranus.receiveShadow = true;
 
 //neptunus
-const neptunusTexture = textureLoader.load('./img/2k_neptune.jpg');
-const geo9 = new THREE.SphereGeometry(1, 64, 64);
-const material9 = new THREE.MeshStandardMaterial({map: neptunusTexture});
-const mesh9 = new THREE.Mesh(geo9, material9);
-mesh9.position.x = 26;
+const neptunus = new THREE.SphereGeometry(1, 64, 64);
+const material_neptunus = new THREE.MeshStandardMaterial({map: neptunusTexture});
+const meshNeptunus = new THREE.Mesh(neptunus, material_neptunus);
+
+meshNeptunus.position.x = -25.5;
+meshNeptunus.position.z = -5;
 
 const neptunusOrbit = new THREE.Object3D();
 scene.add(neptunusOrbit);
-neptunusOrbit.add(mesh9);
-mesh8.castShadow = true;
-mesh8.receiveShadow = true;
+neptunusOrbit.add(meshNeptunus);
+meshNeptunus.castShadow = true;
+meshNeptunus.receiveShadow = true;
 
 
 const SpotLight = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight.position.copy(mesh.position);
+SpotLight.position.copy(meshMatahari.position);
 scene.add( SpotLight );
 
 const SpotLight2 = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight2.position.copy(mesh.position);
+SpotLight2.position.copy(meshMatahari.position);
 scene.add( SpotLight2 );
 
 const SpotLight3 = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight3.position.copy(mesh.position);
+SpotLight3.position.copy(meshMatahari.position);
 scene.add( SpotLight3 );
 
 const SpotLight4= new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight4.position.copy(mesh.position);
+SpotLight4.position.copy(meshMatahari.position);
 scene.add( SpotLight4 );
 
 const SpotLight5 = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight5.position.copy(mesh.position);
+SpotLight5.position.copy(meshMatahari.position);
 scene.add( SpotLight5 );
 
 const SpotLight6 = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight6.position.copy(mesh.position);
+SpotLight6.position.copy(meshMatahari.position);
 scene.add( SpotLight6 );
 
 const SpotLight7 = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight7.position.copy(mesh.position);
+SpotLight7.position.copy(meshMatahari.position);
 scene.add( SpotLight7 );
 
 const SpotLight8 = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight8.position.copy(mesh.position);
+SpotLight8.position.copy(meshMatahari.position);
 scene.add( SpotLight8 );
 
 const SpotLight9 = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight9.position.copy(mesh.position);
+SpotLight9.position.copy(meshMatahari.position);
 scene.add( SpotLight9 );
 
 const SpotLight10 = new THREE.SpotLight( 0xffffff, 50, 1000 );
-SpotLight10.position.copy(mesh.position);
+SpotLight10.position.copy(meshMatahari.position);
 scene.add( SpotLight10 );
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
 
-SpotLight.target = mesh2;
-SpotLight2.target = mesh3;
-SpotLight3.target = mesh4;
-SpotLight4.target = mesh5;
-SpotLight5.target = mesh6;
-SpotLight6.target = mesh7;
+SpotLight.target = meshMerkuri;
+SpotLight2.target = meshVenus;
+SpotLight3.target = meshBumi;
+SpotLight4.target = meshMars;
+SpotLight5.target = meshJupiter;
+SpotLight6.target = meshSaturnus;
 SpotLight7.target = meshRing;
-SpotLight8.target = mesh8;
-SpotLight9.target = mesh9;
+SpotLight8.target = meshUranus;
+SpotLight9.target = meshNeptunus;
 
 //garis orbit1
 const garisOrbit1 = new THREE.RingGeometry( 5.1, 5.11, 60 );
@@ -263,31 +262,31 @@ const orb_control = new OrbitControls(cam, renderer.domElement);
 
 function draw() {
     orb_control.update();
-    mesh.rotation.y += 0.002;
+    meshMatahari.rotation.y += 0.002;
 
-    mesh2.rotation.y += 0.002;
-    merkuriOrbit.rotation.y -= 0.002;
+    meshMerkuri.rotation.y += 0.002;
+    // merkuriOrbit.rotation.y -= 0.002;
 
-    mesh3.rotation.y += 0.002;
-    venusOrbit.rotation.y += 0.002;
+    meshVenus.rotation.y += 0.002;
+    // venusOrbit.rotation.y += 0.002;
 
-    mesh4.rotation.y += 0.01;
-    earthOrbit.rotation.y -= 0.003;
+    meshBumi.rotation.y += 0.01;
+    // earthOrbit.rotation.y -= 0.003;
 
-    mesh5.rotation.y += 0.002;
-    marsOrbit.rotation.y -= 0.004;
+    meshMars.rotation.y += 0.002;
+    // marsOrbit.rotation.y -= 0.004;
 
-    mesh6.rotation.y += 0.002;
-    jupiterOrbit.rotation.y -= 0.002;
+    meshJupiter.rotation.y += 0.002;
+    // jupiterOrbit.rotation.y -= 0.002;
 
-    mesh7.rotation.y += 0.002;
-    saturnusOrbit.rotation.y -= 0.004;
+    meshSaturnus.rotation.y += 0.002;
+    // saturnusOrbit.rotation.y -= 0.004;
 
-    mesh8.rotation.y += 0.002;
-    uranusOrbit.rotation.y -= 0.003;
+    meshUranus.rotation.y += 0.002;
+    // uranusOrbit.rotation.y -= 0.003;
 
-    mesh9.rotation.y += 0.002;
-    neptunusOrbit.rotation.y += 0.001;
+    meshNeptunus.rotation.y += 0.002;
+    // neptunusOrbit.rotation.y += 0.001;
     renderer.render(scene, cam);
     requestAnimationFrame(draw);
 }
