@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { add } from 'three/tsl';
 
 const scene = new THREE.Scene();
 const cam = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -7,6 +8,7 @@ const renderer = new THREE.WebGLRenderer({alpha: true,antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 cam.position.z = 25;
+cam.position.y = 10;
 
 // tekstur planet
 const textureLoader = new THREE.TextureLoader();
@@ -26,6 +28,7 @@ const matahari = new THREE.SphereGeometry(3, 64, 64);
 const material_matahari = new THREE.MeshBasicMaterial({map: sunTexture});
 const meshMatahari = new THREE.Mesh(matahari, material_matahari);
 scene.add(meshMatahari);
+
 
 //merkuri
 const merkuri = new THREE.SphereGeometry(0.4, 64, 64);
@@ -259,6 +262,100 @@ meshGaris8.rotation.x = - Math.PI / 2;
 scene.add( meshGaris8 );
 
 const orb_control = new OrbitControls(cam, renderer.domElement);
+
+
+meshMatahari.name = "Matahari";
+meshMerkuri.name = "Merkuri";
+meshVenus.name = "Venus";
+meshBumi.name = "Bumi";
+meshMars.name = "Mars";
+meshJupiter.name = "Jupiter";
+meshSaturnus.name = "Saturnus";
+meshUranus.name = "Uranus";
+meshNeptunus.name = "Neptunus";
+
+const raycaster = new THREE.Raycaster();
+const mouse = {};
+const defaultCamPos = cam.position.clone();
+const defaultTarget = orb_control.target.clone();
+
+const planetConfig = {
+  Matahari: { mesh: meshMatahari, offsetZ: 10 },
+  Merkuri:  { mesh: meshMerkuri,  offsetZ: 4 },
+  Venus:    { mesh: meshVenus,    offsetZ: 4 },
+  Bumi:     { mesh: meshBumi,     offsetZ: 4 },
+  Mars:     { mesh: meshMars,     offsetZ: 3 },
+  Jupiter:  { mesh: meshJupiter,  offsetZ: 7 },
+  Saturnus: { mesh: meshSaturnus, offsetZ: 7 },
+  Uranus:   { mesh: meshUranus,   offsetZ: 6 },
+  Neptunus: { mesh: meshNeptunus, offsetZ: 6 }
+};
+
+function zoomToPlanet(mesh, offsetZ) {
+  gsap.to(cam.position, {
+    x: mesh.position.x,
+    y: mesh.position.y,
+    z: mesh.position.z + offsetZ,
+    duration: 2,
+    ease: "power2.out"
+  });
+
+  gsap.to(orb_control.target, {
+    x: mesh.position.x,
+    y: mesh.position.y,
+    z: mesh.position.z,
+    duration: 2,
+    ease: "power2.out"
+  });
+}
+
+function zoomOut() {
+  gsap.to(cam.position, {
+    x: defaultCamPos.x,
+    y: defaultCamPos.y,
+    z: defaultCamPos.z,
+    duration: 2,
+    ease: "power2.out"
+  });
+
+  gsap.to(orb_control.target, {
+    x: defaultTarget.x,
+    y: defaultTarget.y,
+    z: defaultTarget.z,
+    duration: 2,
+    ease: "power2.out"
+  });
+
+  isZoomed = false;
+  currentPlanet = null;
+}
+
+addEventListener('mousedown', (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, cam);
+  const items = raycaster.intersectObjects(scene.children, true);
+
+  if (items.length === 0) {
+    zoomOut();
+    return;
+  }
+
+  const obj = items[0].object;
+  const config = planetConfig[obj.name];
+
+  if (!config) {
+    zoomOut();
+    return;
+  }
+
+  zoomToPlanet(config.mesh, config.offsetZ);
+  isZoomed = true;
+  currentPlanet = obj.name;
+});
+
+
 
 function draw() {
     orb_control.update();
