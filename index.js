@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { add } from 'three/tsl';
+import { gsap } from 'gsap';
 
 const scene = new THREE.Scene();
 const cam = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -280,15 +280,15 @@ const defaultCamPos = cam.position.clone();
 const defaultTarget = orb_control.target.clone();
 
 const planetConfig = {
-  Matahari: { mesh: meshMatahari, offsetZ: 10 },
-  Merkuri:  { mesh: meshMerkuri,  offsetZ: 4 },
-  Venus:    { mesh: meshVenus,    offsetZ: 4 },
-  Bumi:     { mesh: meshBumi,     offsetZ: 4 },
-  Mars:     { mesh: meshMars,     offsetZ: 3 },
-  Jupiter:  { mesh: meshJupiter,  offsetZ: 7 },
-  Saturnus: { mesh: meshSaturnus, offsetZ: 7 },
-  Uranus:   { mesh: meshUranus,   offsetZ: 6 },
-  Neptunus: { mesh: meshNeptunus, offsetZ: 6 }
+  Matahari: { mesh: meshMatahari, offsetZ: 10, desc: "Matahari adalah bintang di pusat tata surya kita. Ini adalah bola plasma yang sangat panas yang memancarkan cahaya dan energi yang menopang kehidupan di Bumi." },
+  Merkuri:  { mesh: meshMerkuri,  offsetZ: 4, desc: "Merkuri adalah planet terdekat dengan Matahari dan yang terkecil di tata surya kita. Permukaannya berbatu dan penuh kawah, mirip dengan Bulan." },
+  Venus:    { mesh: meshVenus,    offsetZ: 4, desc: "Venus adalah planet kedua dari Matahari dan planet terpanas di tata surya kita. Atmosfernya sangat tebal dan penuh dengan gas rumah kaca." },
+  Bumi:     { mesh: meshBumi,     offsetZ: 4, desc: "Bumi adalah planet ketiga dari Matahari dan satu-satunya planet yang diketahui mendukung kehidupan." },
+  Mars:     { mesh: meshMars,     offsetZ: 3, desc: "Mars adalah planet keempat dari Matahari dan dikenal sebagai planet merah karena oksida besi di permukaannya." },
+  Jupiter:  { mesh: meshJupiter,  offsetZ: 7, desc: "Jupiter adalah planet kelima dari Matahari dan raksasa gas terbesar di tata surya kita. Ia memiliki cincin yang tipis dan banyak bulan." },
+  Saturnus: { mesh: meshSaturnus, offsetZ: 7, desc: "Saturnus adalah planet keenam dari Matahari dan dikenal karena cincinnya yang sangat menonjol." },
+  Uranus:   { mesh: meshUranus,   offsetZ: 6, desc: "Uranus adalah planet ketujuh dari Matahari dan dikenal karena rotasi miringnya yang ekstrem." },
+  Neptunus: { mesh: meshNeptunus, offsetZ: 6, desc: "Neptunus adalah planet kedelapan dari Matahari dan planet terjauh di tata surya kita. Ia memiliki angin tercepat di antara planet-planet." }
 };
 
 function zoomToPlanet(mesh, offsetZ) {
@@ -330,6 +330,16 @@ function zoomOut() {
   currentPlanet = null;
 }
 
+const popup = document.getElementById("planetPopup");
+const popupName = document.getElementById("planetName");
+const popupDesc = document.getElementById("planetDesc");
+
+function showPopup(name, desc) {
+  popupName.textContent = name;
+  popupDesc.textContent = desc;
+  popup.classList.remove("hidden");
+}
+
 addEventListener('mousedown', (event) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -338,24 +348,23 @@ addEventListener('mousedown', (event) => {
   const items = raycaster.intersectObjects(scene.children, true);
 
   if (items.length === 0) {
-    zoomOut();
     return;
-  }
+    zoomOut();
+  }             
 
   const obj = items[0].object;
   const config = planetConfig[obj.name];
 
-  if (!config) {
-    zoomOut();
+  if (!config) {   
+    zoomOut(); 
     return;
   }
 
   zoomToPlanet(config.mesh, config.offsetZ);
+  showPopup(obj.name, config.desc);
   isZoomed = true;
   currentPlanet = obj.name;
 });
-
-
 
 function draw() {
     orb_control.update();
@@ -368,18 +377,8 @@ function draw() {
     meshSaturnus.rotation.y += 0.002;
     meshUranus.rotation.y += 0.002;
     meshNeptunus.rotation.y += 0.002;
-    
-    // merkuriOrbit.rotation.y -= 0.002;
-    // venusOrbit.rotation.y += 0.002;
-    // earthOrbit.rotation.y -= 0.003;
-    // marsOrbit.rotation.y -= 0.004;
-    // jupiterOrbit.rotation.y -= 0.002;
-    // saturnusOrbit.rotation.y -= 0.004;
-    // uranusOrbit.rotation.y -= 0.003;
-    // neptunusOrbit.rotation.y += 0.001;
-    
+
     renderer.render(scene, cam);
     requestAnimationFrame(draw);
 }
 draw();
-
