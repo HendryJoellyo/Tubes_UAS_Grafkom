@@ -263,30 +263,24 @@ const orb_control = new OrbitControls(cam, renderer.domElement);
 function draw() {
     orb_control.update();
     meshMatahari.rotation.y += 0.002;
-
     meshMerkuri.rotation.y += 0.002;
-    // merkuriOrbit.rotation.y -= 0.002;
-
     meshVenus.rotation.y += 0.002;
-    // venusOrbit.rotation.y += 0.002;
-
     meshBumi.rotation.y += 0.01;
-    // earthOrbit.rotation.y -= 0.003;
-
     meshMars.rotation.y += 0.002;
-    // marsOrbit.rotation.y -= 0.004;
-
     meshJupiter.rotation.y += 0.002;
-    // jupiterOrbit.rotation.y -= 0.002;
-
     meshSaturnus.rotation.y += 0.002;
-    // saturnusOrbit.rotation.y -= 0.004;
-
     meshUranus.rotation.y += 0.002;
-    // uranusOrbit.rotation.y -= 0.003;
-
     meshNeptunus.rotation.y += 0.002;
+    
+    // merkuriOrbit.rotation.y -= 0.002;
+    // venusOrbit.rotation.y += 0.002;
+    // earthOrbit.rotation.y -= 0.003;
+    // marsOrbit.rotation.y -= 0.004;
+    // jupiterOrbit.rotation.y -= 0.002;
+    // saturnusOrbit.rotation.y -= 0.004;
+    // uranusOrbit.rotation.y -= 0.003;
     // neptunusOrbit.rotation.y += 0.001;
+    
     renderer.render(scene, cam);
     requestAnimationFrame(draw);
 }
