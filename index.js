@@ -348,17 +348,12 @@ addEventListener('mousedown', (event) => {
   const items = raycaster.intersectObjects(scene.children, true);
 
   if (items.length === 0) {
-    return;
     zoomOut();
+    return;
   }             
 
   const obj = items[0].object;
   const config = planetConfig[obj.name];
-
-  if (!config) {   
-    zoomOut(); 
-    return;
-  }
 
   zoomToPlanet(config.mesh, config.offsetZ);
   showPopup(obj.name, config.desc);
