@@ -356,7 +356,7 @@ addEventListener('mousedown', (event) => {
   
     zoomToPlanet(config.mesh, config.offsetZ);
     showPopup(obj.name, config.desc);
-    isZoomed = true;
+    // isZoomed = true;
     currentPlanet = obj.name;
   } else {
     popup.classList.add("hidden");
