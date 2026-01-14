@@ -357,10 +357,10 @@ addEventListener('mousedown', (event) => {
     isZoomed = true;
     currentPlanet = obj.name;
   } else {
+    popup.classList.add("hidden");
     if (isZoomed) {
       zoomOut();
     }
-    popup.classList.add("hidden");
   }         
 
 });
