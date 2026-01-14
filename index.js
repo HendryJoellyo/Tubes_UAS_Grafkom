@@ -330,6 +330,7 @@ function zoomOut() {
   currentPlanet = null;
 }
 
+// bantuan AI
 const popup = document.getElementById("planetPopup");
 const popupName = document.getElementById("planetName");
 const popupDesc = document.getElementById("planetDesc");
@@ -339,6 +340,8 @@ function showPopup(name, desc) {
   popupDesc.textContent = desc;
   popup.classList.remove("hidden");
 }
+
+// --------
 
 addEventListener('mousedown', (event) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
