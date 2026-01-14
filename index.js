@@ -40,7 +40,7 @@ meshMerkuri.position.z = 5;
 const merkuriOrbit = new THREE.Object3D();
 scene.add(merkuriOrbit);
 merkuriOrbit.add(meshMerkuri);
-meshMerkuri.castShadow = true;
+
 meshMerkuri.receiveShadow = true;
 
 //venus
@@ -53,7 +53,6 @@ const venusOrbit = new THREE.Object3D();
 scene.add(venusOrbit);
 venusOrbit.add(meshVenus);
 
-meshVenus.castShadow = true;
 meshVenus.receiveShadow = true;
 
 //bumi
@@ -67,7 +66,6 @@ const earthOrbit = new THREE.Object3D();
 scene.add(earthOrbit);
 earthOrbit.add(meshBumi);
 
-meshBumi.castShadow = true;
 meshBumi.receiveShadow = true;
 
 
@@ -81,7 +79,6 @@ const marsOrbit = new THREE.Object3D();
 scene.add(marsOrbit);
 marsOrbit.add(meshMars);
 
-meshMars.castShadow = true;
 meshMars.receiveShadow = true;
 
 
@@ -96,7 +93,6 @@ const jupiterOrbit = new THREE.Object3D();
 scene.add(jupiterOrbit);
 jupiterOrbit.add(meshJupiter);
 
-meshJupiter.castShadow = true;
 meshJupiter.receiveShadow = true;
 
 
@@ -343,6 +339,8 @@ function showPopup(name, desc) {
 
 // --------
 
+let isZoomed = false;
+
 addEventListener('mousedown', (event) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -356,9 +354,12 @@ addEventListener('mousedown', (event) => {
   
     zoomToPlanet(config.mesh, config.offsetZ);
     showPopup(obj.name, config.desc);
-    // isZoomed = true;
+    isZoomed = true;
     currentPlanet = obj.name;
   } else {
+    if (isZoomed) {
+      zoomOut();
+    }
     popup.classList.add("hidden");
   }         
 
