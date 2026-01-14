@@ -350,18 +350,18 @@ addEventListener('mousedown', (event) => {
   raycaster.setFromCamera(mouse, cam);
   const items = raycaster.intersectObjects(scene.children, true);
 
-  if (items.length === 0) {
-    zoomOut();
-    return;
-  }             
+  if (items.length > 0) {
+    const obj = items[0].object;
+    const config = planetConfig[obj.name];
+  
+    zoomToPlanet(config.mesh, config.offsetZ);
+    showPopup(obj.name, config.desc);
+    isZoomed = true;
+    currentPlanet = obj.name;
+  } else {
+    popup.classList.add("hidden");
+  }         
 
-  const obj = items[0].object;
-  const config = planetConfig[obj.name];
-
-  zoomToPlanet(config.mesh, config.offsetZ);
-  showPopup(obj.name, config.desc);
-  isZoomed = true;
-  currentPlanet = obj.name;
 });
 
 function draw() {
