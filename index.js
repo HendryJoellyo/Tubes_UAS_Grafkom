@@ -41,7 +41,6 @@ const merkuriOrbit = new THREE.Object3D();
 scene.add(merkuriOrbit);
 merkuriOrbit.add(meshMerkuri);
 
-meshMerkuri.receiveShadow = true;
 
 //venus
 const venus = new THREE.SphereGeometry(0.6, 64, 64);
@@ -53,7 +52,6 @@ const venusOrbit = new THREE.Object3D();
 scene.add(venusOrbit);
 venusOrbit.add(meshVenus);
 
-meshVenus.receiveShadow = true;
 
 //bumi
 const bumi = new THREE.SphereGeometry(0.6, 64, 64);
@@ -66,8 +64,6 @@ const earthOrbit = new THREE.Object3D();
 scene.add(earthOrbit);
 earthOrbit.add(meshBumi);
 
-meshBumi.receiveShadow = true;
-
 
 //mars
 const mars = new THREE.SphereGeometry(0.4, 64, 64);
@@ -78,8 +74,6 @@ meshMars.position.x = -11;
 const marsOrbit = new THREE.Object3D();
 scene.add(marsOrbit);
 marsOrbit.add(meshMars);
-
-meshMars.receiveShadow = true;
 
 
 //jupiter
@@ -92,9 +86,6 @@ meshJupiter.position.z = -10;
 const jupiterOrbit = new THREE.Object3D();
 scene.add(jupiterOrbit);
 jupiterOrbit.add(meshJupiter);
-
-meshJupiter.receiveShadow = true;
-
 
 //saturnus
 const saturnus = new THREE.SphereGeometry(1, 64, 64);
@@ -113,13 +104,6 @@ meshRing.position.set(0,0,0)
 meshRing.rotation.x = -Math.PI / 3;
 meshSaturnus.add( meshRing);
 
-meshRing.castShadow = true;
-meshRing.receiveShadow = true;
-
-meshSaturnus.castShadow = true;
-meshSaturnus.receiveShadow = true;
-
-
 //uranus
 const uranus = new THREE.SphereGeometry(1, 64, 64);
 const material_uranus = new THREE.MeshStandardMaterial({map: uranusTexture});
@@ -130,8 +114,6 @@ meshUranus.position.z = 21;
 const uranusOrbit = new THREE.Object3D();
 scene.add(uranusOrbit);
 uranusOrbit.add(meshUranus);
-meshUranus.castShadow = true;
-meshUranus.receiveShadow = true;
 
 //neptunus
 const neptunus = new THREE.SphereGeometry(1, 64, 64);
@@ -144,10 +126,8 @@ meshNeptunus.position.z = -5;
 const neptunusOrbit = new THREE.Object3D();
 scene.add(neptunusOrbit);
 neptunusOrbit.add(meshNeptunus);
-meshNeptunus.castShadow = true;
-meshNeptunus.receiveShadow = true;
 
-
+// spotlight
 const SpotLight = new THREE.SpotLight( 0xffffff, 50, 1000 );
 SpotLight.position.copy(meshMatahari.position);
 scene.add( SpotLight );
